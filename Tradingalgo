@@ -1,0 +1,82 @@
+ Press ⌃R to execute it or replace it with your code.
+# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+
+
+def print_hi(name):
+    # Use a breakpoint in the code line below to debug your script.
+    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    print_hi('PyCharm')
+
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+def trade(data):
+    # Set the trading size and stop loss threshold
+    trade_size = 0.01
+    stop_loss_threshold = -0.02
+
+    # Initialize the current position and stop loss
+    position = 0
+    stop_loss = 0
+
+    # Iterate over the data to implement the trading strategy
+    for datum in data:
+        # Check if the market is consolidating
+        if is_consolidating(datum):
+            # If the market is consolidating, check if a breakout has occurred
+            if is_breakout(datum):
+                # If a breakout has occurred, enter a long position
+                if datum.close > datum.open:
+                    position += trade_size
+                    stop_loss = datum.low * (1 + stop_loss_threshold)
+                # If a breakdown has occurred, enter a short position
+                else:
+                    position -= trade_size
+                    stop_loss = datum.high * (1 - stop_loss_threshold)
+
+        # If the market is not consolidating, check if a stop loss has been reached
+        elif stop_loss > 0 and (
+                (position > 0 and datum.low <= stop_loss) or (position < 0 and datum.high >= stop_loss)):
+            # If a stop loss has been reached, exit the position
+            position = 0
+            stop_loss = 0
+
+    # Return the final position
+    return position
+
+
+def trade(data):
+    # Set the trading size and stop loss threshold
+    trade_size = 100
+    stop_loss_threshold = -0.02
+
+    # Initialize the current position and stop loss
+    position = 0
+    stop_loss = 0
+
+    # Iterate over the data to implement the trading strategy
+    for datum in data:
+        # Check if the market is consolidating
+        if is_consolidating(datum):
+            # If the market is consolidating, check if a breakout has occurred
+            if is_breakout(datum):
+                # If a breakout has occurred, enter a long position
+                if datum.close > datum.open:
+                    position += trade_size
+                    stop_loss = datum.low * (1 + stop_loss_threshold)
+                # If a breakdown has occurred, enter a short position
+                else:
+                    position -= trade_size
+                    stop_loss = datum.high * (1 - stop_loss_threshold)
+
+        # If the market is not consolidating, check if a stop loss has been reached
+        elif stop_loss > 0 and (
+                (position > 0 and datum.low <= stop_loss) or (position < 0 and datum.high >= stop_loss)):
+            # If a stop loss has been reached, exit the position
+            position = 0
+            stop_loss = 0
+
+    # Return the final position
+    return position
